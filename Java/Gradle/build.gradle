@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+jar {
+    baseName = 'hello'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.2.2.RELEASE'
+}
