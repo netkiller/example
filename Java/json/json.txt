@@ -1,0 +1,1 @@
+{"nickname":"netkiller","name":"Neo","department":"IT","role":"Admin","phone":["+8612355566688","0755-2222-3333"],"address":{"street":"Longhua","city":"Shenzhen","zipcode":518000}}
