@@ -1,10 +1,11 @@
 package cn.netkiller.example;
 
 import java.util.Calendar;
+import java.util.Date;
 
-public class sss {
+public class DateTest {
 
-	public sss() {
+	public DateTest() {
 		// TODO Auto-generated constructor stub
 	}
 	public void test(){
@@ -13,7 +14,7 @@ public class sss {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		sss s = new sss();
+		DateTest s = new DateTest();
 		s.test();
 
 		
@@ -22,6 +23,9 @@ public class sss {
 		int month = cal.get(Calendar.MONTH )+1;
 		
 		System.out.println(year + "年 " + month + "月");
+		
+		Date date = new Date();
+		System.out.println(date);
 	}
 
 }

@@ -1,6 +1,7 @@
 package cn.netkiller.example;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -47,14 +48,26 @@ public class DateCompare {
 		System.out.println();
 
 	}
+	public void fun3() throws InterruptedException, ParseException {
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		//Date time = formatter.parse("2016-09-27 16:29");
+		Date time = formatter.parse("2016-08-09 09:15");
+		Date startDate = formatter.parse("2016-08-09 09:15");
+		Date endDate = formatter.parse("2016-09-27 16:30");
+		
+		if (time.before(startDate) || time.after(endDate)) {
+			System.out.println("Skip");
+		}
+	}
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, ParseException {
 		// TODO Auto-generated method stub
 		DateCompare dateCompare = new DateCompare();
-		dateCompare.fun1();
+//		dateCompare.fun1();
+//		System.out.println();
+//		dateCompare.fun2();
 		System.out.println();
-		dateCompare.fun2();
-
+		dateCompare.fun3();
 	}
 
 }
