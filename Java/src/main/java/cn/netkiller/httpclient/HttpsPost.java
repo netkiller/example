@@ -1,4 +1,4 @@
-package cn.netkiller.example;
+package cn.netkiller.httpclient;
 
 import java.io.File;
 
@@ -22,13 +22,13 @@ public class HttpsPost {
 	// TODO Auto-generated constructor stub
 	public final static void main(String[] args) throws Exception {
 		// Trust own CA and all self-signed certs
-		SSLContext sslcontext = SSLContexts.custom().loadTrustMaterial(new File("d:/chuangfu24.com.cer"), "nopassword".toCharArray(), new TrustSelfSignedStrategy()).build();
+		SSLContext sslcontext = SSLContexts.custom().loadTrustMaterial(new File("d:/netkiller.com.cer"), "nopassword".toCharArray(), new TrustSelfSignedStrategy()).build();
 		// Allow TLSv1 protocol only
 		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" }, null, SSLConnectionSocketFactory.getDefaultHostnameVerifier());
 		CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
 		try {
 
-			HttpGet httpget = new HttpGet("https://api.chuangfu24.net/v1/withdraw/ping.json");
+			HttpGet httpget = new HttpGet("https://api.netkiller.net/v1/withdraw/ping.json");
 
 			System.out.println("Executing request " + httpget.getRequestLine());
 
