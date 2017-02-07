@@ -32,7 +32,7 @@ public class HttpClientTest {
 			SSLConnectionSocketFactory sslFactory = new SSLConnectionSocketFactory(builder.build());
 			CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslFactory).build();
 
-			HttpGet httpGet = new HttpGet("https://api:password@api.cfd88.com/v1/withdraw/ping.json");
+			HttpGet httpGet = new HttpGet("https://api:password@api.netkiller.com/v1/withdraw/ping.json");
 //			httpGet.addHeader("Host", "api.netkiller.com");
 			CloseableHttpResponse response = httpclient.execute(httpGet);
 			System.out.println(response.getStatusLine());
