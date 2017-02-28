@@ -39,7 +39,7 @@ public class HttpClientSSL {
 			HttpEntity httpEntity = new StringEntity("{\"loginname\":\"888666\", \"bankname\":\"中国银行\",\"billno\":\"B040216210517590856\",\"flag\":\"a\",\"amount\":12,\"accountnumber\":\"9555500060007000\",\"accounttype\":\"借记卡\",\"createdate\":\"2016-09-10T20:12:12\",\"remarks\":\"CFD\",\"currency\":\"CNY\",\"accountname\":\"王宝强\",\"branchname\":\"南山支行\",\"bankaddress\":\"深圳市南山区科技园\",\"customerlevel\":2,\"trustlevel\":1}", "UTF-8");
 			httpPost.setEntity(httpEntity);
 
-			// HttpGet("https://cfd:99U3YruuUe1CNXnLFOKe@api.netkiller.com/v1/withdraw/ping.json");
+			// HttpGet("https://neo:chen@api.netkiller.com/v1/withdraw/ping.json");
 			CloseableHttpResponse response = httpclient.execute(httpPost);
 
 			System.out.println(response.getStatusLine());
