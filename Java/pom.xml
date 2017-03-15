@@ -23,7 +23,7 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.sun.jersey/jersey-client -->
-		<!-- <dependency> <groupId>com.sun.jersey</groupId> <artifactId>jersey-client</artifactId> <version>1.19.3</version> </dependency> -->
+		<dependency> <groupId>com.sun.jersey</groupId> <artifactId>jersey-client</artifactId> <version>1.19.3</version> </dependency>
 
 
 		<!-- <dependency> <groupId>junit</groupId> <artifactId>junit</artifactId> <version>3.8.1</version> <scope>test</scope> </dependency> -->

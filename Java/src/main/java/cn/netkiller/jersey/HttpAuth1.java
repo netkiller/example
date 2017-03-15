@@ -24,7 +24,7 @@ public class HttpAuth1 {
 			Client client = Client.create(clientConfig);
 			client.addFilter(new HTTPBasicAuthFilter("user", "password"));
 
-			WebResource webResource = client.resource("http://api.netkiller.cn/v1/config/read.json?name=cache");
+			WebResource webResource = client.resource("https://api.netkiller.cn/v1/config/read.json?name=cache");
 
 			ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
