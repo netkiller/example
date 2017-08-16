@@ -1,0 +1,16 @@
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/App.java
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/config/OAuth2Config.java
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/service/BuddyService.java
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/model/Party.java
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/controller/PartyController.java
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/repository/PersonRepository.java
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/repository/UserRepository.java
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/model/User.java
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/model/Level.java
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/service/DrinkingBuddyService.java
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/config/WebSecurityConfig.java
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/controller/PersonController.java
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/model/Person.java
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/service/UserService.java
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/model/Skill.java
+/Users/neo/Documents/workspace/oauth/server/src/main/java/cn/netkiller/oauth/server/repository/PartyRepository.java

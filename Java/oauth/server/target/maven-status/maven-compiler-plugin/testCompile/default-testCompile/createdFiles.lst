@@ -1,0 +1,5 @@
+cn/netkiller/oauth/server/controller/PartyControllerTest.class
+cn/netkiller/oauth/server/service/DrinkingBuddyServiceTest.class
+cn/netkiller/oauth/server/controller/PersonControllerTest.class
+cn/netkiller/oauth/server/repository/PartyRepositoryTest.class
+cn/netkiller/oauth/server/repository/PersonRepositoryTest.class

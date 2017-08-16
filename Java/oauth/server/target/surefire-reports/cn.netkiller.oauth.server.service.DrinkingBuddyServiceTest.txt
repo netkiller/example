@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+Test set: cn.netkiller.oauth.server.service.DrinkingBuddyServiceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 sec <<< FAILURE! - in cn.netkiller.oauth.server.service.DrinkingBuddyServiceTest
+findBuddyTest(cn.netkiller.oauth.server.service.DrinkingBuddyServiceTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.Error: Unresolved compilation problem: 
+	The method findBuddy(Person) of type DrinkingBuddyService must override a superclass method
+
+	at cn.netkiller.oauth.server.service.DrinkingBuddyService.findBuddy(DrinkingBuddyService.java:23)
+	at cn.netkiller.oauth.server.service.DrinkingBuddyServiceTest.findBuddyTest(DrinkingBuddyServiceTest.java:50)
+
