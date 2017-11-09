@@ -1,5 +1,5 @@
-/Users/neo/Documents/workspace/oauth/server/src/test/java/cn/netkiller/oauth/server/repository/PartyRepositoryTest.java
-/Users/neo/Documents/workspace/oauth/server/src/test/java/cn/netkiller/oauth/server/repository/PersonRepositoryTest.java
-/Users/neo/Documents/workspace/oauth/server/src/test/java/cn/netkiller/oauth/server/service/DrinkingBuddyServiceTest.java
-/Users/neo/Documents/workspace/oauth/server/src/test/java/cn/netkiller/oauth/server/controller/PersonControllerTest.java
-/Users/neo/Documents/workspace/oauth/server/src/test/java/cn/netkiller/oauth/server/controller/PartyControllerTest.java
+/Users/neo/Documents/workspace/example/Java/oauth/server/src/test/java/cn/netkiller/oauth/server/repository/PartyRepositoryTest.java
+/Users/neo/Documents/workspace/example/Java/oauth/server/src/test/java/cn/netkiller/oauth/server/controller/PartyControllerTest.java
+/Users/neo/Documents/workspace/example/Java/oauth/server/src/test/java/cn/netkiller/oauth/server/controller/PersonControllerTest.java
+/Users/neo/Documents/workspace/example/Java/oauth/server/src/test/java/cn/netkiller/oauth/server/service/DrinkingBuddyServiceTest.java
+/Users/neo/Documents/workspace/example/Java/oauth/server/src/test/java/cn/netkiller/oauth/server/repository/PersonRepositoryTest.java

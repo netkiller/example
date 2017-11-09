@@ -1,1 +1,14 @@
+cn/netkiller/oauth/server/repository/UserRepository.class
+cn/netkiller/oauth/server/model/Level.class
+cn/netkiller/oauth/server/config/OAuth2Configuration.class
+cn/netkiller/oauth/server/model/Skill.class
+cn/netkiller/oauth/server/controller/PersonController.class
+cn/netkiller/oauth/server/repository/PersonRepository.class
+cn/netkiller/oauth/server/config/WebSecurityConfiguration.class
+cn/netkiller/oauth/server/repository/PartyRepository.class
+cn/netkiller/oauth/server/controller/TestRestController.class
+cn/netkiller/oauth/server/model/Person.class
+cn/netkiller/oauth/server/model/User.class
+cn/netkiller/oauth/server/model/Party.class
+cn/netkiller/oauth/server/service/UserService.class
 cn/netkiller/oauth/server/App.class
