@@ -19,3 +19,4 @@
 php_errors.log
 */build/
 */.gradle/*
+.DS_Store

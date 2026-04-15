@@ -1,0 +1,22 @@
+
+server:
+  port: 8765
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG
+
+zuul:
+  routes:
+    restful:
+      path: /restful/**
+      url: http://api:5Vo7BYB85zLMY9su@api.5kwords.com:8443/restful
+    linux:
+      path: /linux/**
+      url: http://www.netkiller.cn
+      stripPrefix: false
+    mysql:
+      path: /mysql/**
+      url: http://www.netkiller.cn/mysql
+      stripPrefix: true    

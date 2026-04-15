@@ -1,0 +1,42 @@
+node {
+    stage("检出") {
+
+        sh 'ci-init'
+        checkout(
+          [$class: 'GitSCM', branches: [[name: env.GIT_BUILD_REF]], userRemoteConfigs: [[url: env.GIT_REPO_URL]]]
+        )
+		sh 'pwd'
+    }
+	docker.image('maven:latest').inside("-v /root/.m2:/root/.m2") {
+        stage("构建") {
+
+                echo "构建中..."
+                sh 'java -version'
+                sh 'mvn package -Dmaven.test.failure.ignore -Dmaven.test.skip=true' // mvn 示例
+                echo "构建完成."
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true // 收集构建产物
+
+        }
+
+        stage("测试") {       
+
+                echo "单元测试中..."
+                sh 'java -jar target/webflux-0.0.1-SNAPSHOT.jar &'
+                sleep 20
+                sh 'mvn test -Dmaven.test.failure.ignore' // mvn 示例
+                echo "单元测试完成."
+                junit 'target/surefire-reports/*.xml' // 收集单元测试报告的调用过程
+
+        }
+
+        stage("部署") {
+
+                echo "部署中..."
+                // 请在这里放置收集单元测试报告的调用过程，例如:
+                // sh 'mvn tomcat7:deploy' // Maven tomcat7 插件示例：
+                // sh './deploy.sh' // 自研部署脚本
+                echo "部署完成"
+
+        }
+    }
+}

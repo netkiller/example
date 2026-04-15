@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="true">
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+	<include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+
+	<appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+		<destination>127.0.0.1:4567</destination>
+		<encoder class="net.logstash.logback.encoder.LogstashEncoder">
+			<providers>
+				<timestamp />
+				<logLevel />
+				<threadName />
+				<loggerName />
+				<message />
+			</providers>
+		</encoder>
+	</appender>
+	<root level="info">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="logstash" />
+	</root>
+</configuration>

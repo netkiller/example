@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+	<property name="logstash.type" value="api" />
+	<property name="logstash.tags" value="springboot" />
+	<appender name="LOGSTASH" class="com.cwbase.logback.RedisAppender">
+		<source>application.properties</source>
+		<type>${logstash.type}</type>
+		<tags>${logstash.tags}</tags>
+
+		<host>localhost</host>
+		<database>10</database>
+		<key>logstash:redis</key>
+
+		<mdc>true</mdc>
+		<location>true</location>
+		<callerStackIndex>0</callerStackIndex>
+
+	</appender>
+	<appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<appender-ref ref="LOGSTASH" />
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date{yyyy-MM-dd HH:mm:ss} %-4relative [%thread] %-5level %logger{35} : %msg %n</pattern>
+		</encoder>
+	</appender>
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+		<appender-ref ref="LOGSTASH" />
+	</root>
+</configuration>

@@ -1,0 +1,1 @@
+-- INSERT INTO users (user_id, username, password, enabled) VALUES  ('1', 'netkiller@msn.com', '$2a$10$Cyj3hM39V34r5pMeQ.Y9peuUqYMBSvsJ7GTBgp4.stWaTtWMboYGS', true);

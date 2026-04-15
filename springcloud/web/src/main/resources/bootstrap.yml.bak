@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: common
+  cloud:
+    config:
+      label: master
+      profile: development
+      uri: http://123.207.61.225:8888
+      username: cfg
+      password: s3cr3t
+management:
+  security:
+    enabled: false

@@ -1,0 +1,7 @@
+# ==============================
+spring.application.name=schedule
+eureka.client.serviceUrl.defaultZone=http://eureka:s3cr3t@123.207.61.225:8761/eureka/
+spring.cloud.bootstrap.enabled=true
+spring.cloud.bootstrap.location=classpath:bootstrap.properties
+spring.jackson.time-zone=GMT+8
+# ==============================

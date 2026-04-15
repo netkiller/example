@@ -1,0 +1,9 @@
+sms1:
+  aliyun:
+    name: netkiller
+    mobile: 13088884444
+    message: 阿里云
+  tencent:
+    name: neo
+    mobile: 13144446666
+    message: 腾讯云

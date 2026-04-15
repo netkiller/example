@@ -1,0 +1,59 @@
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+  session:
+    cookie:
+      name: PHPSESSID
+  compression:
+    enabled: true
+spring:
+  application:
+    name: spring-cloud-eureka-web-client
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  messages:
+    encoding: UTF-8
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  thymeleaf:
+    prefix: classpath:/templates/
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+  redis:
+    database: 12
+    host: 123.207.61.225
+    port: 6379
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
+  session:
+    store-type: redis
+logging:
+  path: /tmp
+  file: /tmp/spring.log
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:s3cr3t@123.207.61.225:8761/eureka/
+feign:
+  compression:
+    response:
+      enabled: true
+    request:
+      enabled: true
+      mime-types:
+      - application/xml
+      - text/xml
+      - application/json
+      min-request-size: 2048

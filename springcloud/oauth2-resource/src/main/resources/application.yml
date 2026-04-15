@@ -1,0 +1,44 @@
+server:
+  port: 8082
+#    servlet:
+#        context-path: 
+
+  
+
+#security:
+#  oauth2:
+#    sso:
+#      loginPath: /login
+#    client:
+#      clientId: sso
+#      clientSecret: secret
+#      authorizedGrantTypes: authorization_code
+#      scope: app
+#      accessTokenUri: http://localhost:8080/oauth/token
+#      userAuthorizationUri: http://localhost:8080/oauth/authorize
+#    resource:
+#      userInfoUri: http://localhost:8080/user
+#      preferTokenInfo: false
+#    authorization:
+#      check-token-access: http://localhost:8080/oauth/check_token
+
+spring:
+  redis:
+    host: localhost
+#  thymeleaf:
+#    cache: false
+
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://localhost:8080/user
+#      jwt:
+#        key-value: test-secret
+        # To run the application, replace this with a valid JWK Set URI
+#        jwk-set-uri: https://example.com/oauth2/default/v1/keys
+
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG        

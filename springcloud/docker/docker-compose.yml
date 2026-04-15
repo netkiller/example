@@ -1,0 +1,49 @@
+hystrix:
+  image: netkiller/hystrix-dashboard
+  ports:
+   - "7979:7979"
+  links:
+   - gateway
+   - discovery
+discovery:
+  image: netkiller/discovery
+  ports:
+   - "8761:8761"
+config:
+  image: netkiller/config
+  ports:
+   - "8888:8888"
+  links:
+   - discovery
+gateway:
+  image: netkiller/gateway
+  ports:
+   - "10000:10000"
+  links:
+   - discovery
+   - config
+   - user
+   - movie
+   - recommendation
+user:
+  image: netkiller/users
+  links:
+   - discovery
+   - config
+oauth:
+  image: netkiller/oauth2
+  links:
+   - discovery
+   - config
+recommendation:
+  image: netkiller/recommendation
+  links:
+   - discovery
+   - config
+moviesui:
+  image: netkiller/consol
+  ports:
+     - "9006:9006"
+  links:
+   - discovery
+   - config

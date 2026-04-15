@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>文物藏品登记</title>
+
+<style type="text/css">
+table, th, td {
+	border: 1px solid black;
+}
+
+table {
+	font-family: verdana, arial, sans-serif;
+	font-size: 11px;
+	color: #333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+
+table th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+
+table td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+</style>
+</head>
+<body>
+	<h1>文物藏品登记</h1>
+	<table border="1" width="100%">
+		<caption></caption>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>提供方式</th>
+				<th>征购意向金额</th>
+				<th>藏品时期</th>
+				<th>藏品描述</th>
+				<th>真实来源</th>
+				<th>姓名</th>
+				<th>联系方式</th>
+				<th>地区</th>
+				<th>详细地址</th>
+				<th>登记时间</th>
+				<th>藏品图片</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="gather : ${gathers}">
+				<td th:text="${gather.id}"></td>
+				<td th:text="${gather.method}"></td>
+				<td th:text="${gather.money}"></td>
+				<td th:text="${gather.age}"></td>
+				<td th:text="${gather.description}"></td>
+				<td th:text="${gather.source}"></td>
+				<td th:text="${gather.name}"></td>
+				<td th:text="${gather.tel}"></td>
+				<td th:text="${gather.area}"></td>
+				<td th:text="${gather.address}"></td>
+				<td th:text="${#dates.format(gather.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+				<td th:unless="${gather.picture == null}"><a
+					th:each="pic : ${#strings.arraySplit(gather.picture, ',')}"
+					href="#" th:href="${'/upload/' + pic}"> <img src="#"
+						th:src="${'/upload/' + pic}" height="128" th:target="_blank" /></a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<span th:text="${'登记数量 '+totalElements + ' 当前页码 '}"></span>
+	<span th:text="${number+1}"></span> /
+	<span th:text="${totalPages}"></span>
+
+	<a href="#"
+		th:href="@{/h5/gather/browse?sort=id,desc&size=10(page=${number-1})}">上一页</a>
+	<a href="#"
+		th:href="@{/h5/gather/browse?sort=id,desc&size=10(page=${number+1})}">下一页</a>
+	<a href="#" th:href="@{/h5/gather/download}">下载Excel文件</a>
+</body>
+</html>

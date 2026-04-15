@@ -1,0 +1,2 @@
+#log自动装配
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=cn.netkiller.core.config.LogAutoConfiguration

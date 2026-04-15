@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cn.netkiller</groupId>
+		<artifactId>microservice</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>cn.netkiller</groupId>
+	<artifactId>eureka</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>eureka</name>
+	<url>http://www.netkiller.cn</url>
+	<description>Spring Cloud Eureka Server</description>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>cn.netkiller.eureka.EurekaApplication</mainClass>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>1.2.2</version>
+				<configuration>
+					<imageName>${docker.registry}/${docker.registry.name}/${project.artifactId}</imageName>
+					<baseImage>${docker.image}</baseImage>
+					<maintainer>netkiller@msn.com</maintainer>
+					<volumes>/tmp</volumes>
+					<workdir>/srv</workdir>
+					<env>
+						<JAVA_OPTS>-server -Xms512m -Xmx4096m -Djava.security.egd=file:/dev/./urandom</JAVA_OPTS>
+					</env>
+					<exposes>6379</exposes>
+					<entryPoint>["sh", "-c", "java ${JAVA_OPTS} -jar /srv/${project.build.finalName}.jar ${SPRING_OPTS}"]</entryPoint>
+					<resources>
+						<resource>
+							<targetPath>/srv</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+					<!-- <image>${docker.image.prefix}/${project.artifactId}</image> -->
+					<!-- <newName>${docker.image.prefix}/${project.artifactId}:${project.version}</newName> -->
+					<!-- <serverId>docker-hub</serverId> -->
+					<!-- <registryUrl>https://index.docker.io/v1/</registryUrl> -->
+					<registryUrl>http://${docker.registry}/v2/</registryUrl>
+					<imageTags>
+						<!-- <imageTag>${project.version}</imageTag> -->
+						<imageTag>latest</imageTag>
+					</imageTags>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

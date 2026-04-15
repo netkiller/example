@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>cn.netkiller</groupId>
+	<artifactId>parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>demo</name>
+	<description>Demo project for Spring Boot</description>
+	<url>http://www.netkiller.cn</url>
+
+	<organization>
+		<name>Netkiller Spring Cloud 手札</name>
+		<url>http://www.netkiller.cn</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<name>Neo</name>
+			<email>netkiller@msn.com</email>
+			<organization>Netkiller Spring Cloud 手札</organization>
+			<organizationUrl>http://www.netkiller.cn</organizationUrl>
+			<roles>
+				<role>Author</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<!--使用aliyun镜像 -->
+	<repositories>
+		<repository>
+			<id>alimaven</id>
+			<name>Maven Aliyun Mirror</name>
+			<url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- <java.version>11</java.version> -->
+		<java.version>14</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<maven.compiler.release>${java.version}</maven.compiler.release>
+		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+		<docker.image.prefix>netkiller</docker.image.prefix>
+	</properties>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.3.RELEASE</version>
+		<relativePath />
+	</parent>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<modules>
+		<module>dependencies</module>
+		<module>example</module>
+		<module>common</module>
+		<module>schedule</module>
+		<module>config</module>
+		<module>web</module>
+		<module>eureka</module>
+		<module>zuul</module>
+		<module>api</module>
+
+		<module>wallet</module>
+		<module>doc</module>
+		<module>oauth2</module>
+		<module>config-client</module>
+		<module>consol-producer</module>
+		<module>consol-consumer</module>
+		<module>consol-config</module>
+		<module>openfeign</module>
+		<module>gateway</module>
+		<module>webflux</module>
+		<module>oauth2-authorization_code</module>
+		<module>oauth2-client</module>
+		<module>oauth2-simple</module>
+		<module>docker</module>
+		<module>neo4j</module>
+		<module>oauth2-jdbc</module>
+		<module>swagger2</module>
+		<module>oauth2-resource</module>
+		<module>oauth2-jwt-authorization</module>
+		<module>oauth2-jwt-resource</module>
+		<module>etl</module>
+		<module>datasource</module>
+		<module>spring-boot-starter</module>
+		<module>thymeleaf</module>
+		<module>spring-boot-starter-log-test</module>
+		<module>aop</module>
+		<module>GraphQL</module>
+		<module>elasticsearch</module>
+		<module>json</module>
+		<module>spring-boot-starter-customize</module>
+		<module>spring-boot-starter-customize-test</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<release>11</release>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

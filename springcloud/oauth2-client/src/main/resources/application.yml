@@ -1,0 +1,97 @@
+server:
+  port: 8080
+
+APP-CLIENT-ID: 180579ba67875ffc18e3
+APP-CLIENT-SECRET: 8175af8f569197d8c1e3499e15a0e2f3b6007b95
+
+
+#spring.security.oauth2.client.registration.my-client-1.client-id=admin
+#spring.security.oauth2.client.registration.my-client-1.client-secret=123456
+#spring.security.oauth2.client.registration.my-client-1.client-name=admin
+#spring.security.oauth2.client.registration.my-client-1.scope=read
+#spring.security.oauth2.client.registration.my-client-1.redirect-uri=http://microservice1.linbsoft.com:8805/login/oauth2/code/callback
+#spring.security.oauth2.client.registration.my-client-1.client-authentication-method=basic
+#spring.security.oauth2.client.registration.my-client-1.authorization-grant-type=authorization_code
+#spring.security.oauth2.client.registration.my-client-1.provider=my-oauth-provider
+
+
+#spring.security.oauth2.client.provider.my-oauth-provider.authorization-uri=http://centos7.linbsoft.com:8301/oauth/authorize
+#spring.security.oauth2.client.provider.my-oauth-provider.token-uri=http://centos7.linbsoft.com:8301/oauth/token
+#spring.security.oauth2.client.provider.my-oauth-provider.user-info-uri=http://centos7.linbsoft.com:8301/user
+#spring.security.oauth2.client.provider.my-oauth-provider.user-name-attribute=name
+
+#spring.redis.database=0
+#spring.redis.host=127.0.0.1
+#spring.redis.port=6379
+#spring.redis.password=saasYun[aB9c
+#spring.redis.jedis.pool.max-idle=8
+#spring.redis.jedis.pool.max-wait=-1
+#spring.redis.jedis.pool.min-idle=0
+#spring.redis.timeout=5000
+
+
+spring:
+  redis:
+    host: localhost
+  security:
+    oauth2:
+      client:
+        provider:
+          netkiller:
+            authorization-uri: http://localhost:8085/oauth/authorize
+            token-uri: http://localhost:8085/oauth/token
+            user-info-uri: http://localhost:8085/user
+            user-name-attribute: username
+            jwk-set-uri: http://localhost:8085/oauth/token_key    
+              
+          yahoo-oidc:
+            issuer-uri: https://api.login.yahoo.com
+        registration:
+          netkiller:
+            client-id: sso
+            client-secret: secret
+            client-name: Neo
+            provider: netkiller
+            scope: read
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:${server.port}/login/oauth2/code/netkiller
+            
+#          netkiller-1:
+#            client-id: api
+#            client-secret: secret
+#            client-name: Neo Jwt
+#            provider: netkiller
+#            scope: read
+#            authorization-grant-type: authorization_code
+#            redirect-uri: http://localhost:${server.port}/login/oauth2/code/netkiller
+          github-client-1:
+            client-id: ${APP-CLIENT-ID}
+            client-secret: ${APP-CLIENT-SECRET}
+            client-name: Github user
+            provider: github
+            scope: user
+            redirect-uri: http://localhost:${server.port}/login/oauth2/code/github
+          github-client-2:
+            client-id: ${APP-CLIENT-ID}
+            client-secret: ${APP-CLIENT-SECRET}
+            client-name: Github email
+            provider: github
+            scope: user:email
+            redirect-uri: http://localhost:${server.port}/login/oauth2/code/github
+          yahoo-oidc:
+            client-id: ${YAHOO-CLIENT-ID}
+            client-secret: ${YAHOO-CLIENT-SECRET}
+          github-repos:
+            client-id: ${APP-CLIENT-ID}
+            client-secret: ${APP-CLIENT-SECRET}
+            scope: public_repo
+            redirect-uri: "{baseUrl}/github-repos"
+            provider: github
+            client-name: GitHub Repositories
+            
+            
+logging:
+  level:
+#    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG             
+          

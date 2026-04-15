@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "spring.redis.jredis.pool.max-active",
+  "type": "java.lang.String",
+  "description": "A description for 'spring.redis.jredis.pool.max-active'"
+}]}

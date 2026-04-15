@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>cn.netkiller</groupId>
+	<artifactId>microservice</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>microservice</name>
+	<url>http://www.netkiller.cn</url>
+	<description>Demo project for Spring Boot</description>
+
+	<organization>
+		<name>Netkiller Spring Cloud 手札</name>
+		<url>http://www.netkiller.cn</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<name>Neo</name>
+			<email>netkiller@msn.com</email>
+			<organization>Netkiller Spring Cloud 手札</organization>
+			<organizationUrl>http://www.netkiller.cn</organizationUrl>
+			<roles>
+				<role>Author</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>18</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<maven.compiler.release>${java.version}</maven.compiler.release>
+		<spring-boot.version>2.4.0.RELEASE</spring-boot.version>
+		<spring-cloud.version>2021.0.3</spring-cloud.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>alimaven</id>
+			<name>Maven Aliyun Mirror</name>
+			<url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.0.0</version>
+		<relativePath />
+	</parent>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+	</dependencies>
+
+	<modules>
+		<module>eureka</module>
+		<module>gateway</module>
+		<module>config</module>
+		<module>webflux</module>
+		<module>openfeign</module>
+		<module>restful</module>
+		<module>sleuth</module>
+		<module>oauth2</module>
+		<module>welcome</module>
+		<module>test</module>
+		<module>aliyun</module>
+	</modules>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<profiles.active>dev</profiles.active>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<profiles.active>prod</profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<profiles.active>test</profiles.active>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>sonar</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- Optional URL to server. Default value is http://localhost:9000 -->
+				<sonar.host.url>http://192.168.30.20:9000</sonar.host.url>
+				<!-- <sonar.projectKey>aabbcc</sonar.projectKey> -->
+				<sonar.login>510966107d69cd32448fcc4372d1383e8d21092b</sonar.login>
+				<sonar.password></sonar.password>
+				<sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+				<!-- <sonar.inclusions>**/*.java,**/*.xml</sonar.inclusions> -->
+				<!-- <sonar.exclusions>**/cn/netkiller/test/*</sonar.exclusions> -->
+			</properties>
+		</profile>
+
+	</profiles>
+
+	<build>
+		<!-- <resources> <resource> <directory>src/main/resources/</directory> <excludes> <exclude>dev/*</exclude> <exclude>prod/*</exclude> <exclude>test/*</exclude> </excludes> <includes> <include>messages/*</include> </includes> </resource> <resource> <directory>src/main/resources/${profiles.active}</directory> </resource> </resources> -->
+		<plugins>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+					<!-- <argLine>${argLine} -Xmx4096m -XX:MaxPermSize=512M ${itCoverageAgent}</argLine> -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.9.0.2155</version>
+			</plugin>
+			<!-- <plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.7</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			 -->
+			<!-- <plugin> <groupId>com.spotify</groupId> <artifactId>docker-maven-plugin</artifactId> <version>1.2.2</version> <executions> <execution> <id>build-image</id> <phase>package</phase> <goals> <goal>build</goal> </goals> </execution> <execution> <id>tag-image</id> <phase>package</phase> <goals> <goal>tag</goal> </goals> <configuration> <image>my-image:${project.version}</image> <newName>registry.example.com/my-image:${project.version}</newName> </configuration> </execution> <execution> <id>push-image</id> 
+				<phase>deploy</phase> <goals> <goal>push</goal> </goals> <configuration> <imageName>registry.example.com/my-image:${project.version}</imageName> </configuration> </execution> </executions> </plugin> -->
+		</plugins>
+	</build>
+
+</project>
