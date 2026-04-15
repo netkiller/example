@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
+				<marker>finance</marker>
+				<marker>market</marker>
+				<marker>customer</marker>
+			</evaluator>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{35}.%method: %msg %n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
+				<marker>finance</marker>
+				<marker>market</marker>
+				<marker>customer</marker>
+			</evaluator>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{35}.%method: %msg %n</pattern>
+		</encoder>
+	</appender>
+
+	<property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} - [%25.25(%thread)] - [%-5level] - %-30.30(%logger{30}) : %msg%n" />
+
+	<appender name="siftingAppender" class="ch.qos.logback.classic.sift.SiftingAppender">
+		<discriminator>
+			<key>userId</key>
+			<defaultValue>unknown</defaultValue>
+		</discriminator>
+		<sift>
+			<appender name="${userId}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+				<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+					<fileNamePattern>${log.path}/${userId}.%d{yyyy-MM-dd}.log</fileNamePattern>
+				</rollingPolicy>
+				<encoder>
+					<pattern>${log.pattern}</pattern>
+				</encoder>
+			</appender>
+		</sift>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+		<appender-ref ref="dailyRollingFileAppender" />
+		<appender-ref ref="siftingAppender" />
+	</root>
+</configuration>

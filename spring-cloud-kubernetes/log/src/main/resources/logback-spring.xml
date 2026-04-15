@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+	<include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+
+	<logger name="org.springframework.web" level="INFO" />
+	<logger name="org.springboot.sample" level="TRACE" />
+	<property name="log.pattern" value="%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{35}.%method: %msg%n" />
+	<springProperty scope="context" name="app" source="spring.application.name" defaultValue="spring-boot-fusion" />
+	<property name="log.path" value="/tmp" />
+
+	<appender name="siftingAppender" class="ch.qos.logback.classic.sift.SiftingAppender">
+		<discriminator>
+			<key>userId</key>
+			<defaultValue>unknown</defaultValue>
+		</discriminator>
+		<sift>
+			<appender name="${userId}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+				<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+					<fileNamePattern>${log.path}/${userId}.%d{yyyy-MM-dd}.log</fileNamePattern>
+				</rollingPolicy>
+				<encoder>
+					<pattern>${log.pattern}</pattern>
+				</encoder>
+			</appender>
+		</sift>
+	</appender>
+	<springProfile name="prod">
+		<appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+			<destination>127.0.0.1:4567</destination>
+			<encoder class="net.logstash.logback.encoder.LogstashEncoder">
+				<providers>
+					<timestamp />
+					<logLevel />
+					<threadName />
+					<loggerName />
+					<message />
+				</providers>
+			</encoder>
+		</appender>
+	</springProfile>
+
+	<root level="info">
+		<springProfile name="dev">
+			<appender-ref ref="CONSOLE" />
+		</springProfile>
+		<springProfile name="test">
+			<appender-ref ref="CONSOLE" />
+			<appender-ref ref="FILE" />
+		</springProfile>
+		<springProfile name="prod">
+			<appender-ref ref="CONSOLE" />
+			<appender-ref ref="logstash" />
+		</springProfile>
+	</root>
+</configuration>

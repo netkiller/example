@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>cn.netkiller</groupId>
+	<artifactId>kubernetes</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>kubernetes</name>
+
+	<url>http://www.netkiller.cn</url>
+	<description>Spring Cloud with Kubernetes</description>
+
+	<organization>
+		<name>Netkiller Spring Cloud 手札</name>
+		<url>http://www.netkiller.cn</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<name>Neo</name>
+			<email>netkiller@msn.com</email>
+			<organization>Netkiller Spring Cloud 手札</organization>
+			<organizationUrl>http://www.netkiller.cn</organizationUrl>
+			<roles>
+				<role>Author</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>17</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<maven.compiler.release>${java.version}</maven.compiler.release>
+
+		<spring.boot-version>2.5.3</spring.boot-version>
+		<spring.cloud-version>2022.0.2</spring.cloud-version>
+
+		<docker.registry>registry.netkiller.cn:5000</docker.registry>
+		<docker.registry.name>netkiller</docker.registry.name>
+		<docker.image>mcr.microsoft.com/java/jre:15-zulu-alpine</docker.image>
+	</properties>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.0.6</version>
+		<relativePath />
+	</parent>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring.cloud-version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-kubernetes-dependencies</artifactId>
+			<version>3.0.1</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+	</dependencies>
+
+	<modules>
+		<module>webflux</module>
+		<module>config</module>
+		<module>provider</module>
+		<module>consumer</module>
+		<module>log</module>
+        <module>authorization</module>
+    </modules>
+
+</project>

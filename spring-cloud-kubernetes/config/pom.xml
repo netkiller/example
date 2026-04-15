@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cn.netkiller</groupId>
+		<artifactId>kubernetes</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>cn.netkiller</groupId>
+	<artifactId>config</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>config</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<!--
+			<exclusions>
+			
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+			-->
+		</dependency>
+
+		<!-- Use Undertow instead -->
+<!-- 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
+		-->
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>1.2.2</version>
+				<configuration>
+					<imageName>${docker.registry}/${docker.registry.name}/${project.artifactId}</imageName>
+					<baseImage>${docker.image}</baseImage>
+					<maintainer>netkiller@msn.com</maintainer>
+					<volumes>/tmp</volumes>
+					<workdir>/srv</workdir>
+					<exposes>8080</exposes>
+					<env>
+						<JAVA_OPTS>-server -Xms128m -Xmx256m</JAVA_OPTS>
+					</env>
+					<entryPoint>["sh", "-c", "java ${JAVA_OPTS} -jar /srv/${project.build.finalName}.jar ${SPRING_OPTS}"]</entryPoint>
+					<resources>
+						<resource>
+							<targetPath>/srv</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+					<!-- <image>${docker.image.prefix}/${project.artifactId}</image> -->
+					<!-- <newName>${docker.image.prefix}/${project.artifactId}:${project.version}</newName> -->
+					<!-- <serverId>docker-hub</serverId> -->
+					<registryUrl>http://${docker.registry}/v2/</registryUrl>
+					<imageTags>
+						<!-- <imageTag>${project.version}</imageTag> -->
+						<imageTag>latest</imageTag>
+					</imageTags>
+				</configuration>
+			</plugin>
+			<!-- 通过fabric8 build -->
+			<!-- <plugin> <groupId>io.fabric8</groupId> <artifactId>fabric8-maven-plugin</artifactId> <version>${fabric8.maven.plugin.version}</version> <executions> <execution> <id>fmp</id> <goals> <goal>resource</goal> <goal>build</goal> </goals> </execution> </executions> <configuration> <enricher> <config> <fmp-controller> <name>mscloud-spring-kubernetes-reload</name> </fmp-controller> <fmp-service> <name>mscloud-spring-kubernetes-reload</name> <type>NodePort</type> </fmp-service> </config> </enricher> </configuration> 
+				</plugin> -->
+		</plugins>
+	</build>
+
+</project>

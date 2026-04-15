@@ -1,0 +1,52 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: pod-reader
+rules:
+  - apiGroups: [""]
+    resources: ["pods","configmaps"]
+    verbs: ["get", "watch", "list"]
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: config-reader
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pod-reader
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: pod-reader
+subjects:
+  - kind: ServiceAccount
+    name: config-reader
+    namespace: default
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: springcloudk8sconfigdemo
+data:
+  application.yml: |-
+    greeting:
+      message: Say Hello to the World
+    farewell:
+      message: Say Goodbye
+    ---
+    spring:
+      profiles: development
+    greeting:
+      message: Say Hello to the Developers
+    farewell:
+      message: Say Goodbye to the Developers
+    ---
+    spring:
+      profiles: production
+    greeting:
+      message: Say Hello to the Ops
